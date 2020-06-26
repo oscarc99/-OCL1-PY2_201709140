@@ -1,0 +1,19 @@
+{
+  "name": "proyecto2",
+  "version": "1.0.0",
+  "description": "Traductor de C# a python",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oscarc99/-OCL1-PY2_201709140.git"
+  },
+  "author": "Oscar Armin Crisostomo Ruiz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oscarc99/-OCL1-PY2_201709140/issues"
+  },
+  "homepage": "https://github.com/oscarc99/-OCL1-PY2_201709140#readme"
+}
