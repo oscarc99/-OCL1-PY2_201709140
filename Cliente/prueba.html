@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta property="og:image" content="assets/img/logo_antennae.png">
+    <title>Simple jsTree</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/jstree.min.js"></script>
+    <script src="./js/prueba.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var jsondata = [
+                           { "id": "ajson1", "parent": "#", "text": "Simple root node" },
+                           { "id": "ajson2", "parent": "#", "text": "Root node 2" },
+                           { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
+                           { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
+            ];
+
+            createJSTree(jsondata);
+        });
+
+        function createJSTree(jsondata) {            
+            $('#SimpleJSTree').jstree({
+                'core': {
+                    'data': jsondata
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="SimpleJSTree"></div>
+</body>
+</html>

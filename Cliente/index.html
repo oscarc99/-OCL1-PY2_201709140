@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Proyect 2 OCL1">
+  <meta name="author" content="Oscar Armin">
+  <meta property="og:image" content="../img/logo.png">
+  <link rel="stylesheet" type="text/css" href="../css/index.css"/>
+  <link rel="stylesheet" href="./dist/themes/default/style.min.css" />
+  <script src="../js/ayuda.js"></script>
+  
+  <title>P2_201709140</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  
+  
+  <script src="../codemirror/lib/codemirror.js"></script>
+  <link rel="stylesheet" href="../codemirror//lib//codemirror.css">
+  <link rel="stylesheet" href="../codemirror//theme//eclipse.css"> 
+  <script src="../codemirror/mode/clike/clike.js"></script>
+  <!-- Custom styles for this template-->
+  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+       
+          
+          <img src="../img/logo.png" width="50" height="40">
+        
+        <div class="sidebar-brand-text mx-3">Traductor</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Abrir</span></a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" onclick="Analiza()"  id="btn4" class="btnp">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Traducir</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" onclick="guardararchivo();" id="guardar" title="Guardar">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Guardar</span></a>
+      </li>
+     
+           <!-- Nav Item - Pages Collapse Menu -->
+           <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+              <i class="fas fa-fw fa-cog"></i>
+              <span>Reportes</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="buttons.html">Errores</a>
+                <a class="collapse-item" href="cards.html">Copias</a>
+                <a class="collapse-item" href="cards.html">Funciones Copias</a>
+                <a class="collapse-item" href="cards.html">Varias copias</a>
+                <a class="collapse-item" href="cards.html" onclick="recargar();">AST</a>
+              </div>
+            </div>
+          </li>
+
+      
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+          <!-- Page Heading -->
+          
+         
+          <div class="group" id="div">
+            <br>
+            
+            <input type="file" id="archivo"   onclick="abrir();">
+            <br>
+            
+            <br>
+            <h4>   C#</h4>
+            <center><textarea rows="7" cols="50" id="textc" ></textarea> </center>
+            
+            <br>
+            <h4>   Python</h4>
+            <center><textarea rows="7" cols="50" id="textpy" contenteditable="true"  readonly></textarea> </center>
+            <h4>   Arbol</h4>
+            <center><textarea rows="7" cols="50" id="textTree" contenteditable="true" readonly></textarea> </center>
+            <br>
+            <h4>   Tabla de variables </h4>
+            <div class="table-responsive rounded bg-dark">
+              <table class="table" id="tablaVar" style="color:white;">
+                  <thead>
+                      <tr>
+                          <th style="width:10%">No.</th>
+                          <th style="width:20%">Tipo</th>
+                          <th style="width:25%">Nombre</th>
+                          <th style="width:10%">Linea</th>
+                          <th style="width:35%">Valor</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+              </table>
+          </div>
+            <br>
+            <br>
+            <div style="width: 100%;height: 80%;">
+                <ul class="nav nav-tabs" style="background-color: #8bb7e4;font-family: Graduate, cursive;">
+                    <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-4">HTML</a></li>
+                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-5">JSON</a></li>
+                </ul>
+                <div class="tab-content" style="height: 86%;">
+                    <div class="tab-pane active" role="tabpanel" id="tab-4" style="height: 100%;"><textarea contenteditable="true" readonly style="width: 100%;height: 100%;" id="txthtml"></textarea></div>
+                    <div class="tab-pane" role="tabpanel" id="tab-5" style="height: 100%;width: 100%;"><textarea contenteditable="true" readonly style="width: 100%;height: 100%;" id="txtjson"></textarea></div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <h4>Errores </h4>
+            <div class="table-responsive rounded bg-dark">
+              <table class="table" id="tablaErrores" style="color:white;">
+                  <thead>
+                      <tr>
+                          <th style="width:10%">No.</th>
+                          <th style="width:20%">Tipo Error</th>
+                          <th style="width:25%">Error</th>
+                          <th style="width:10%">Linea</th>
+                          <th style="width:35%">Descripción</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+              </table>
+          </div>
+
+
+              <br>
+              <br>
+            
+            <div id="container"></div>
+            <h4>Reporte AST</h4>
+            <div id="jstree"></div>
+ 
+          </div>
+ 
+        
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; 201709140</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+  <!-- Bootstrap core JavaScript-->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="../js/sb-admin-2.min.js"></script>
+  
+  <script src="../dist/jstree.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+  <!-- AST Tree -->
+  
+  <script src="../dist/jstree.min.js"></script>
+    
+
+</body>
+
+</html>
