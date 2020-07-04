@@ -1,9 +1,10 @@
 
 // Constantes para los tipos de 'valores' que reconoce nuestra gramática.
 const TIPO_VALOR = {
-	NUMERO:         'VAlOR_NUMERO',
-	NUMERONEG:         'VAlOR_NUMERO_NEGATIVO',
-	ID:             'VALOR_ID',
+	NUMERO:         'VALOR_NUMERO',
+	NUMERONEG:         'VALOR_NUMERO_NEGATIVO',
+    ID:             'VALOR_ID',
+    CHAR:            'VALOR_CHAR',
 	CADENA:         'VALOR_CADENA',
 	INT:            'INT',
 	STRING:         'STRNIG',
@@ -59,7 +60,8 @@ const TIPO_INSTRUCCION = {
 	PARAMETRO:       'PARAMETRO',
 	BREAK:  'BREAK',
 	CONTINUE:'CONTINUE',
-	RETURN:  'RETURN'
+    RETURN:  'RETURN',
+    LLAMADA: 'LLAMADA'
 }
 
 function nuevaOperacion(operandoIzq, operandoDer, tipo) {
@@ -186,7 +188,23 @@ const instruccionesAPI = {
 			};
 		}
 	},
-
+    nuevoBreak: function() {
+		return {
+            /* PARA JSTREE */
+            text: "BREAK",
+            state: { opened: true },
+            children: [
+                {
+                    text: ";",
+                    state: { opened: true }
+                }
+            ],
+            /* DATOS CLASICOS */
+            tipo: tipo,
+            valor: valor
+        };
+	},	
+    
 	nuevoValor: function(valor, tipo) {
 		return {
             /* PARA JSTREE */
@@ -202,8 +220,26 @@ const instruccionesAPI = {
             tipo: tipo,
             valor: valor
         };
-	},	
-
+    },	
+    
+   
+    nuevaLlamada: function(parametro) {
+		return {
+			text: "Llamada",
+            state: { opened: true },
+            children: [
+               {
+                    text: "parametro",
+                    state: { opened: true },
+                    children: parametro
+                }
+            ],
+			/* DATOS CLASICOS */
+			tipo: TIPO_INSTRUCCION.LLAMADA,
+			
+			parametro: parametro
+		}
+	},
 
 	nuevalorfunc: function(id,parametro) {
 		return {
@@ -217,7 +253,7 @@ const instruccionesAPI = {
                 }, {
                     text: "parametro",
                     state: { opened: true },
-                    children: [parametro]
+                    children: parametro
                 }
             ],
 			/* DATOS CLASICOS */
@@ -315,6 +351,16 @@ const instruccionesAPI = {
             tipo_dato: tipo,
             valor: valor
         };
+    },
+    param: function(parametro) {
+        return {
+            /* DATOS PARA JSTREE */
+            text: "Parametro",
+            state: { opened: true },
+            children: [ parametro],
+            /* DATOS CLASICOS */
+            parametro: parametro
+        };
 	},
 
 	parametro: function(tipo,parametro) {
@@ -350,11 +396,11 @@ const instruccionesAPI = {
 				{
                     text: "PARAMETROS",
                     state: { opened: true },
-                    children: [parametros]
+                    children: parametros
                 }, {
                     text: "CUERPO",
                     state: { opened: true },
-                    children: [cuerpo]
+                    children: cuerpo
                 }
 			],
 			/* DATOS CLASICOS */
@@ -392,7 +438,7 @@ const instruccionesAPI = {
                 }, {
                     text: "Instrucciones",
                     state: { opened: true },
-                    children: [instrucciones]
+                    children: instrucciones
                 }
             ],
             /* DATOS CLASICOS */
@@ -418,7 +464,7 @@ const instruccionesAPI = {
                 }, {
                     text: "Instrucciones",
                     state: { opened: true },
-                    children: [instrucciones]
+                    children: instrucciones
                 }
             ],
             /* DATOS CLASICOS */
@@ -440,7 +486,7 @@ const instruccionesAPI = {
                 }, {
                     text: "Instrucciones",
                     state: { opened: true },
-                    children: [cuerpo]
+                    children: cuerpo
 				},{
 					text: "Elses",
                     state: { opened: true },
@@ -487,7 +533,7 @@ const instruccionesAPI = {
                 }, {
                     text: "Instrucciones",
                     state: { opened: true },
-                    children: [instrucciones]
+                    children: instrucciones
                 }
             ],
             /* DATOS CLASICOS */
@@ -510,7 +556,7 @@ const instruccionesAPI = {
                 }, {
                     text: "Instrucciones",
                     state: { opened: true },
-                    children: [instrucciones]
+                    children: instrucciones
                 }
             ],
             /* DATOS CLASICOS */
@@ -538,7 +584,7 @@ const instruccionesAPI = {
         };
 	},
 
-	nuevofor: function(Asignacion,expresionLogica,aod,instrucciones) {
+	nuevofor: function(Asignacion,expresionLogica,variable,aod,instrucciones) {
         return {
             /* PARA JSTREE */
             text: "For",
@@ -565,7 +611,7 @@ const instruccionesAPI = {
                 }, {
                     text: "Instrucciones",
                     state: { opened: true },
-                    children: [instrucciones]
+                    children: instrucciones
                 }
             ],
             /* DATOS CLASICOS */
@@ -574,8 +620,9 @@ const instruccionesAPI = {
             Asignacion: Asignacion,
             expresionLogica: expresionLogica,
             instrucciones: instrucciones,
-            aumentodecremento: aod,
             variable: variable,
+            aumentodecremento: aod
+            
             
         };
 	},

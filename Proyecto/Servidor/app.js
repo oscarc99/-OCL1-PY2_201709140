@@ -5,12 +5,14 @@ var cors = require("cors");
 var bodyParser = require("body-parser");
 var gramatica = require("./Analizador/Gramatica");
 var errores_1 = require("./Analizador/errores");
+
 var app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/Analizar/', function (req, res) {
     errores_1.errores.clear();
+    
     var entrada = req.body.text;
     var resultado = parser(entrada);
     
@@ -23,6 +25,14 @@ app.get('/Error/', (req, res) =>{
     
     res.send(resultado);
 });
+
+app.get('/Toke/', (req, res) =>{
+    
+    var resultado =getTokens();
+    
+    res.send(resultado);
+});
+
 
 /*---------------------------------------------------------------*/
 
@@ -38,6 +48,14 @@ function parser(texto) {
     }
     catch (e) {
         return "Error en compilacion de Entrada: " + e.toString();
+    }
+}
+function getTokens() {
+    try {
+        return tokens_1.tokens.gettoken();
+    }
+    catch (er) {
+        return "Error al enviar tokens: " + er.toString();
     }
 }
 
