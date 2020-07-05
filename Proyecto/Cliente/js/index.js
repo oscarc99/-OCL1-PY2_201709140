@@ -1,21 +1,31 @@
 "use strict";
 function a123(){
     
-
+    var url = "http://localhost:8080/Json/";
     var texto = document.getElementById("txthtml").value;
-    var text = document.getElementById("txtjson");
+    document.getElementById("txtjson").innerHTML = "asdasdad";
+    
+    $.post(url,{text:texto},function(data,status){
+        if(status.toString()=="success"){
+            
 
-    var j =  traducirHTML(texto);
-    text.innerHTML = j;
+            var json = JSON.stringify(data,null,2);
+            
+
+            
+            
+            document.getElementById("txtjson").innerHTML = json.toString();
+            
+                       
+        }else{
+            alert("Error estado de conexion:"+status);
+        }
+    });
+    
 }
 function Analiza(){
-
-    
     var texto = document.getElementById("textc").value;
-    
-
     var tex = document.getElementById("textTree");
-
     var urlAnalsis='http://localhost:8080/Analizar/';
     var urlErrores = "http://localhost:8080/Error/";
     
@@ -82,7 +92,8 @@ function createJSTree(jsondata) {
             'data': jsondata
         }
     });
-  }
+}
+  
 function ayuda (texto){
     var cadenaH="";
     var dentro = false;
@@ -878,7 +889,7 @@ function traducir() {
     document.getElementById("textpy").value = traduccion;
     console.log("json");
     console.log(json);
-    document.getElementById("txtjson").value = json;
+    
     tablasVar();
    
 }
