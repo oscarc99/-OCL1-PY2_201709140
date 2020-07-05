@@ -20,7 +20,7 @@ func main() {
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js/"))))
 	http.Handle("/dist/", http.StripPrefix("/dist/", http.FileServer(http.Dir("dist/"))))
 	http.Handle("/vendor/", http.StripPrefix("/vendor/", http.FileServer(http.Dir("vendor/"))))
-
+	http.Handle("/node_modules/", http.StripPrefix("/node_modules/", http.FileServer(http.Dir("node_modules/"))))
 	http.HandleFunc("/", index)
 	http.HandleFunc("/otherPage", index)
 	fmt.Printf("Servidor escuchando en: http://localhost:8000/")

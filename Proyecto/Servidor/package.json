@@ -15,7 +15,9 @@
     "jison": "^0.4.18",
     "nodemon": "^2.0.4",
     "request": "^2.88.0",
-    "request-promise-native": "^1.0.7"
+    "request-promise-native": "^1.0.7",
+    "x2js": "^3.4.0",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "@types/cors": "^2.8.4",

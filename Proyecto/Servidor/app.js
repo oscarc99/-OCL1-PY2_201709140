@@ -6,6 +6,7 @@ var bodyParser = require("body-parser");
 var gramatica = require("./Analizador/Gramatica");
 var errores_1 = require("./Analizador/errores");
 
+
 var app = express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -33,7 +34,13 @@ app.get('/Toke/', (req, res) =>{
     res.send(resultado);
 });
 
+app.post('/Json/', function (req, res) {
+    var entrada = req.body.text;
+    res.send(html(entrada));
 
+   
+    
+});
 /*---------------------------------------------------------------*/
 
 var server = app.listen(8080,  () => {
@@ -67,7 +74,19 @@ function getError() {
         return "Error al enviar errores: " + er.toString();
     }
 }
+function html(texto){
 
+    const xml2js = require('xml2js');
+    
+    const parser = new xml2js.Parser();
+    
+    
+    parser.parseString(texto, (err, result) => {
+        console.log(result);
+        return result;
+
+    });
+}
 
 
 exports.default = app;
