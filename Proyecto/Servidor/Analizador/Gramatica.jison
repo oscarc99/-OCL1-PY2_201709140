@@ -211,6 +211,7 @@ idfor:  tipoDato ids valores {$$=instruccionesAPI.declaracion($1,$2,$3);}
 elses: telse tipodeelse{ $$=$2;}
        |{$$="";}
        ;
+       
 tipodeelse:llavea cuerpovoid llavec {$$= instruccionesAPI.nuevoelse($2);}
         |  tif para condicion parc llavea cuerpovoid llavec elses { $$=instruccionesAPI.nuevoif($3,$6,$8); }
          | error { $$=instruccionesAPI.nuevoError($1); CErrores.errores.addError(new CNodoError.nodoError("SINTACTICO","No se esperaba el token: "+yytext,this._$.first_line,yytext));  }

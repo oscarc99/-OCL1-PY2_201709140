@@ -50,7 +50,9 @@
 "<"             return 'menor';
 ">"             return 'mayor';
 "="             return 'igual';
-
+[0-9]+("."[0-9]+)\b  	                return 'decimal';
+[0-9]+\b				return 'entero';
+([a-zA-Z_])[a-zA-Z0-9_]*	        return 'id';
 [ \t\r\n\f] %{ /*se ignoran*/ %}
 
 .               return 'texto';
@@ -92,6 +94,9 @@ cuerpovoidx: ahead cuerpovoid chead {$$=instruccionesAPI.head($2);}
    | texto {$$ = $1 } 
    | input {$$=instruccionesAPI.input();}
    | br {$$=instruccionesAPI.br();}
+   | entero {$$ = $1 } 
+   | decimal{$$ = $1 } 
+   | id{$$ = $1 } 
    
    ;
 

@@ -3,7 +3,7 @@ function a123(){
     
     var url = "http://localhost:8080/Json/";
     var texto = document.getElementById("txthtml").value;
-    document.getElementById("txtjson").innerHTML = "asdasdad";
+    
     
     $.post(url,{text:texto},function(data,status){
         if(status.toString()=="success"){
